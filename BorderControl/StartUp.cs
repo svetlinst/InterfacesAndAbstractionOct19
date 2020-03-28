@@ -2,34 +2,35 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     class StartUp
     {
         static void Main(string[] args)
         {
-            List<IIdentifiable> inhabitant = new List<IIdentifiable>();
+            List<IBirthable> birthables = new List<IBirthable>();
             string input;
             while ((input = Console.ReadLine())!= "End")
             {
                 var tokens = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                switch (tokens.Length)
+                switch (tokens[0])
                 {
-                    case 3:
-                        Citizen citizen = new Citizen(tokens[0], int.Parse(tokens[1]), tokens[2]);
-                        inhabitant.Add(citizen);
+                    case "Citizen":
+                        Citizen citizen = new Citizen(tokens[1], int.Parse(tokens[2]), tokens[3], tokens[4]);
+                        birthables.Add(citizen);
                         break;
-                    case 2:
-                        Robot robot = new Robot(tokens[0], tokens[1]);
-                        inhabitant.Add(robot);
+                    case "Pet":
+                        Pet pet = new Pet(tokens[1], tokens[2]);
+                        birthables.Add(pet);
                         break;
                 }
             }
-            var fakeIdEndStr = Console.ReadLine();
-            foreach (var record in inhabitant)
+            var year = int.Parse(Console.ReadLine());
+            foreach (var record in birthables)
             {
-                if (record.Id.EndsWith(fakeIdEndStr))
+                if (int.Parse(record.Birthdate.Split('/')[2])==year)
                 {
-                    Console.WriteLine(record.Id);
+                    Console.WriteLine(record.Birthdate);
                 }
             }
         }

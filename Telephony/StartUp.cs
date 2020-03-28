@@ -12,7 +12,7 @@
             Smartphone smartphone = new Smartphone();
             foreach (var num in numbers)
             {
-                smartphone.Call(num);
+                smartphone.Call(num);   
             }
             foreach (var address in addresses)
             {

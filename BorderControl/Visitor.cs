@@ -2,18 +2,15 @@
 {
     public abstract class Visitor : INamable, IBuyer
     {
-        public virtual int Food { get; private set; }
+        public abstract int Food { get; protected set; }
 
-        public virtual string Name { get; private set; }
-
-        public virtual void BuyFood()
-        {
-            
-        }
-
+        public abstract string Name { get; protected set; }
+        
         public Visitor(string name)
         {
             this.Name = name;
         }
+
+        public abstract void BuyFood();
     }
 }
